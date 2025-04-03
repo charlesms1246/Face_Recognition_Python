@@ -7,32 +7,7 @@ import dlib
 import face_recognition  # Install with: pip install face_recognition
 
 class EnhancedFaceRecognitionSystem:
-    def __init__(self, data_dir="face_data", model_path="face_model.pkl"):
-        """Initialize the enhanced face recognition system that works well with few images"""
-        self.data_dir = data_dir
-        self.model_path = model_path
-        
-        # Create data directory if it doesn't exist
-        if not os.path.exists(data_dir):
-            os.makedirs(data_dir)
-        
-        # Load face detector from dlib (more robust than Haar cascades)
-        self.face_detector = dlib.get_frontal_face_detector()
-        
-        # Load face recognition model from face_recognition library (based on dlib)
-        # This uses 128-dimension face embeddings which work well with few examples
-        
-        # Initialize or load the classifier
-        if os.path.exists(model_path):
-            with open(model_path, 'rb') as f:
-                self.model_data = pickle.load(f)
-                self.known_face_encodings = self.model_data['encodings']
-                self.known_face_names = self.model_data['names']
-            print(f"Model loaded from {model_path}")
-        else:
-            self.known_face_encodings = []
-            self.known_face_names = []
-            print("No existing model found. You'll need to add face images.")
+    
     
     def detect_faces(self, image):
         """Detect faces in an image and return face locations"""
